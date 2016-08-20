@@ -31,6 +31,18 @@
     <!--</md-card>-->
     <!--</div>-->
     <div class="techs" layout-align="center" layout="row">
+        <md-card md-theme="default" data-ng-repeat="fixture in main.livescoreMatches track by $index"
+                 flex-xs="100" flex-sm="45" flex="30">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{ fixture.matchState }} {{ fixture.liveTime }}</span>
+                    <span class="md-subhead">{{ fixture.teams[0].homeTeamName }}</span>
+                    <span class="md-subhead">{{ fixture.teams[1].awayTeamName }}</span>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+    </div>
+    <div class="techs" layout-align="center" layout="row">
         <md-card md-theme="default" data-ng-repeat="fixture in main.fixtures track by $index"
                  flex-xs="100" flex-sm="45" flex="30">
             <md-card-title>
