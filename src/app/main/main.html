@@ -1,6 +1,25 @@
-<md-content>
-  <header>
-    <acme-navbar></acme-navbar>
-  </header>
-  <live-fixtures livescore-matches="main.livescoreMatches"></live-fixtures>
-</md-content>
+<div class="container">
+  <acme-navbar></acme-navbar>
+  <!--<div class="jumbotron">-->
+    <!--<div class="container">-->
+      <!--<h1>Navbar example</h1>-->
+      <!--<p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It-->
+        <!--includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>-->
+      <!--<p>To see the difference between static and fixed top navbars, just scroll.</p>-->
+      <!--<p>-->
+        <!--<a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>-->
+      <!--</p>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="row toggle">
+    <div class="col-xs-12">
+      <h3 class="pull-left">Live matches for {{ main.today }}</h3>
+      <button id="toggleFiltering" class="btn btn-success pull-right" ng-click="main.toggleFiltering()">Toggle Filtering</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="grid1" ui-grid="main.gridOptions" class="grid"></div>
+    </div>
+  </div>
+</div>

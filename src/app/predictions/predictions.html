@@ -1,9 +1,4 @@
-<header>
+<div class="container">
     <acme-navbar></acme-navbar>
-</header>
-<div data-ng-repeat="fixture in predictions.fixtures track by $index"
-     flex-xs="100" flex-sm="45" flex="30">
-    <span class="md-headline">{{ main.arrayOfNames[$index] }}</span>
-    <span class="md-subhead">{{ fixture.homeTeamName }}</span>
-    <span class="md-subhead">{{ fixture.awayTeamName }}</span>
+  <div id="grid1" ui-grid="predictions.gridOptions" class="grid"></div>
 </div>

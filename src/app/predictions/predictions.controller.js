@@ -12,17 +12,16 @@
     vm.fixtures = [];
     vm.competitions = [];
     vm.livescoreMatches = [];
+    vm.gridOptions = {
+      excludeProperties: '__metadata',
+    };
 
     activate();
 
     function activate() {
-      footballData.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
-        console.log(result.data);
-        vm.livescoreMatches = result.data;
-      });
       footballData.getFootballData('http://api.football-data.org/v1/fixtures?timeFrame=n2').then(function (result) {
         vm.fixtures = result.fixtures;
-        getAllCompetitions();
+        vm.gridOptions.data = result.fixtures;
       });
     }
 
@@ -50,6 +49,7 @@
           }
         });
       });
+
     }
   }
 })();
