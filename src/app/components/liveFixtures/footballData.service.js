@@ -1,50 +1,60 @@
 (function () {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('football')
-    .factory('footballData', footballData);
+    angular
+        .module('football')
+        .factory('footballData', footballData);
 
-  /** @ngInject */
-  function footballData($log, $http, $q, authHeader) {
+    /** @ngInject */
+    function footballData($http, $q, authHeader) {
 
-    var service = {
-      getFootballData: getFootballData,
-      getLiveScoresData: getLiveScoresData
-    };
+        var service = {
+            getFootballData: getFootballData,
+            getLiveScoresData: getLiveScoresData,
+            setTimeZone: setTimeZone,
+            getTimeZone: getTimeZone
+        };
 
-    return service;
+        return service;
 
-    function getFootballData(uri) {
-      var deferred = $q.defer();
+        function getFootballData(uri) {
+            var deferred = $q.defer();
 
-      $http.get(uri, authHeader).then(success).catch(error);
+            $http.get(uri, authHeader).then(success).catch(error);
 
-      function success(response) {
-        deferred.resolve(response.data);
-      }
+            function success(response) {
+                deferred.resolve(response.data);
+            }
 
-      function error(error) {
-        deferred.reject(error);
-      }
+            function error(error) {
+                deferred.reject(error);
+            }
 
-      return deferred.promise;
+            return deferred.promise;
+        }
+
+        function getLiveScoresData(uri) {
+            var deferred = $q.defer();
+
+            $http.get(uri).then(success).catch(error);
+
+            function success(response) {
+                deferred.resolve(response.data);
+            }
+
+            function error(error) {
+                deferred.reject(error);
+            }
+
+            return deferred.promise;
+        }
+
+        function setTimeZone(timezone) {
+            this.timezone = timezone;
+        }
+
+        function getTimeZone() {
+            return this.timezone;
+        }
     }
-
-    function getLiveScoresData(uri) {
-      var deferred = $q.defer();
-
-      $http.get(uri).then(success).catch(error);
-
-      function success(response) {
-        deferred.resolve(response.data);
-      }
-
-      function error(error) {
-        deferred.reject(error);
-      }
-
-      return deferred.promise;
-    }
-  }
 })();
