@@ -1,11 +1,31 @@
-.navbar-default {
-  background-color: #000;
-  border-color: #000;
+.navbar {
+  background: @mainBackgroundColor;
+  border: 0;
   ul {
     li {
+      height: 80px;
       a {
-        color: #ffb648;
+        color: #fff;
+        line-height: 50px;
       }
     }
+  }
+  .navbar-brand {
+    color: @orange;
+    img{
+      width: 150px;
+      height: auto;
+    }
+  }
+  .nav > li > a:hover, .nav > li > a:focus {
+    background-color: @orange;
+    color: whitesmoke;
+  }
+  .active {
+    background-color: @orange;
+    color: whitesmoke;
+  }
+  .navbar-brand{
+    height: 100%;
   }
 }

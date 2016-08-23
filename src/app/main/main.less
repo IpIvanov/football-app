@@ -7,28 +7,84 @@
   color: #FFF; // change text color
 }
 
-.flag-image{
+.flag-image {
   height: auto;
-  width: 35px;
+  width: 20px;
   border: 1px solid #9d9d9d;
 }
 
-.started{
+.started {
   border-right: 5px solid green;
 }
 
-#toggleFiltering{
+#toggleFiltering {
   margin-top: 15px;
 }
 
-.toggle{
+.toggle {
   margin-bottom: 20px;
 }
 
-.red{
-  color: red;
+.bold-text{
+  font-weight: 600;
 }
 
-.ui-grid-viewport{
+.green {
+  background: rgba(34, 139, 34, 0.5) !important;
+  .ui-grid-cell-contents {
+    color: snow;
+    font-weight: 700;
+  }
+}
+
+.ui-grid-viewport {
   overflow-x: hidden !important;
+}
+
+.btn.btn-default.btn-toggle {
+  background-color: @mainBackgroundColor;
+  border-color: @mainBackgroundColor;
+  color: #fff;
+  border-radius: 0;
+  &:hover, &:active {
+    background-color: @orange;
+    border-color: @orange;
+    outline: none !important;
+  }
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.time-zone {
+  line-height: 65px;
+  margin-right: 10px;
+}
+
+.yellow-cards, .red-cards{
+  box-shadow: 2px 2px 5px #888888;
+  background-color: yellow;
+  font-size: 11px;
+  padding: 0.7px 2px;
+  float: right;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.yellow-cards{
+  margin-left: 3px;
+}
+
+.red-cards{
+  background-color: red;
+  color: #fff;
+}
+
+.team-rank{
+  font-weight: normal;
+  font-size: 10px;
+  color: gray;
+  font-style: italic;
+  font-family: verdana;
+  text-decoration: none;
 }
