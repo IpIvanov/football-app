@@ -30,27 +30,27 @@
                     field: 'startTime',
                     width: 50,
                     enableCellEdit: true,
-                    type: 'date'
+                    type: 'date',
+                    enableFiltering: false
                 },
                 {
-                    name: 'Flag',
-                    field: 'flag',
-                    width: 30,
-                    cellTemplate: '<div class="ui-grid-cell-contents"><img class="flag-image" src="{{COL_FIELD}}" alt="Country flag image"></div>',
+                    name: 'League',
+                    field: 'leagueName',
+                    width: 70,
                     enableFiltering: false,
-                    enableSorting: false
+                    cellTemplate: '<div class="ui-grid-cell-contents"><img class="flag-image" ng-src="{{row.entity.flag}}" alt="Country flag image">{{COL_FIELD}}</div>',
                 },
-                {name: 'League', field: 'leagueName', width: 50},
                 {
                     name: 'State',
                     field: 'matchState',
-                    width: 50,
+                    width: 55,
                     cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
                         if (grid.getCellValue(row, col) === '1 HF' || grid.getCellValue(row, col) === '2 HF' || grid.getCellValue(row, col) === 'H/T') {
                             return 'green';
                         }
                     },
-                    cellTemplate: '<div class="ui-grid-cell-contents" ng-if="row.entity.matchState !== \'Sched\'">{{COL_FIELD}}</div>'
+                    cellTemplate: '<div class="ui-grid-cell-contents" ng-if="row.entity.matchState !== \'Sched\'">{{COL_FIELD}}</div>',
+                    enableFiltering: false
                 },
                 {
                     name: 'Time',
@@ -60,7 +60,8 @@
                         if (grid.getCellValue(row, col) !== '') {
                             return 'green';
                         }
-                    }
+                    },
+                    enableFiltering: false
                 },
                 {
                     name: 'Home Team',
@@ -72,7 +73,7 @@
                     field: 'teams[1].awayTeamName',
                     cellTemplate: '<div class="ui-grid-cell-contents"><b>{{COL_FIELD}}</b> <span class="team-rank">{{row.entity.teams[1].awayTeamLeagueRank}}</span><span class="yellow-cards" ng-if="row.entity.teams[1].awayTeamYcards !== \'0\'">{{row.entity.teams[1].awayTeamYcards}}</span><span class="red-cards" ng-if="row.entity.teams[1].awayTeamRcards !== \'0\'">{{row.entity.teams[1].awayTeamRcards}}</span></div>'
                 },
-                {name: 'H/T', field: 'halfTimeResult', width: 50},
+                {name: 'H/T', field: 'halfTimeResult', width: 50, enableFiltering: false},
                 {
                     name: 'F/T',
                     field: 'fullTimeResult',
@@ -81,7 +82,8 @@
                         if (grid.getCellValue(row, col) !== '-') {
                             return 'bold-text';
                         }
-                    }
+                    },
+                    enableFiltering: false
                 },
                 {name: 'E/T', field: 'extraTimeResult', width: 50, visible: false},
                 {name: 'P/R', field: 'penaltiesResult', width: 50, visible: false}
