@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,8 +7,7 @@
 
     /** @ngInject */
     function convertDateFilter(moment, footballData) {
-
-        return function(date){
+        return function (date) {
             return moment(date).tz(footballData.getTimeZone()).format("HH:mm");
         }
     }
