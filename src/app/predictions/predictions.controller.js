@@ -6,7 +6,7 @@
         .controller('PredictionsController', PredictionsController);
 
     /** @ngInject */
-    function PredictionsController(footballData) {
+    function PredictionsController(footballDataService) {
         var vm = this;
         vm.predictions = [];
 
@@ -17,7 +17,7 @@
         }
 
         function getPredictions() {
-            footballData.getLiveScoresData('http://ipivanov.com/bettingapp/get_predictions.php').then(function (result) {
+            footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_predictions.php').then(function (result) {
                 vm.predictions = result.data;
             });
         }

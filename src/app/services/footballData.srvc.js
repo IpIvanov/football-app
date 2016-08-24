@@ -3,10 +3,10 @@
 
     angular
         .module('football')
-        .factory('footballData', footballData);
+        .factory('footballDataService', footballDataService);
 
     /** @ngInject */
-    function footballData($http, $q, authHeader) {
+    function footballDataService($http, $q, authHeader) {
 
         var service = {
             getFootballData: getFootballData,

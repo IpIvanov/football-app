@@ -6,7 +6,7 @@
         .controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($interval, $filter, moment, footballData, uiGridConstants, _) {
+    function MainController($interval, $filter, moment, footballDataService, fixturesService, _) {
         _.each([1, 2, 3], console.log);
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
@@ -40,7 +40,7 @@
                     field: 'leagueName',
                     width: 70,
                     enableFiltering: false,
-                    cellTemplate: '<div class="ui-grid-cell-contents" ng-mouseover="grid.appScope.parseTooltip(row.entity.leagueName)" uib-tooltip="{{grid.appScope.toolTip}}" tooltip-append-to-body="true" tooltip-placement="left"><img class="flag-image" ng-src="{{row.entity.flag}}" alt="Country flag image">{{COL_FIELD}}</div>'
+                    cellTemplate: '<div class="ui-grid-cell-contents" ng-mouseover="grid.appScope.parseTooltip(row.entity.flag)" uib-tooltip="{{grid.appScope.toolTip}}" tooltip-append-to-body="true" tooltip-placement="left" tooltip-animation="false"><img class="flag-image" ng-src="{{row.entity.flag}}" alt="Country flag image">{{COL_FIELD}}</div>'
                 },
                 {
                     name: 'State',
@@ -101,7 +101,7 @@
         };
 
         vm.parseTooltip = function (p) {
-            vm.toolTip = p;
+            vm.toolTip = p.split( "/" ).pop().split(".")[0].toUpperCase();
         }
 
         activate();
@@ -114,12 +114,13 @@
         }
 
         function getLiveMatches() {
-            footballData.getLiveScoresData('http://freegeoip.net/json/').then(function (result) {
+            footballDataService.getLiveScoresData('http://freegeoip.net/json/').then(function (result) {
                 vm.timeZone = result.time_zone;
-                footballData.setTimeZone(result.time_zone);
-                vm.localTime = moment().tz(footballData.getTimeZone()).format("HH:mm");
-                footballData.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
+                footballDataService.setTimeZone(result.time_zone);
+                vm.localTime = moment().tz(footballDataService.getTimeZone()).format("HH:mm");
+                footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
                     vm.gridOptions.data = result.data;
+                    fixturesService.setFixtures(result.data);
                     angular.forEach(vm.gridOptions.data, function (value, index) {
                         vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
                     });
