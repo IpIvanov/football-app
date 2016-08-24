@@ -8,7 +8,7 @@
     /** @ngInject */
     function convertDateFilter(moment, footballDataService) {
         return function (date) {
-            return moment(date).tz(footballDataService.getTimeZone()).format("HH:mm");
+            return moment(date, 'YYYY-MMM-DD HH:mm:ss').tz(footballDataService.getTimeZone()).format("HH:mm");
         }
     }
 
