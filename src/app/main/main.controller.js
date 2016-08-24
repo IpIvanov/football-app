@@ -6,16 +6,17 @@
         .controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($interval, $filter, moment, footballData, uiGridConstants) {
+    function MainController($interval, $filter, $scope, moment, footballData, uiGridConstants) {
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
-
         vm.fixtures = [];
         vm.competitions = [];
         vm.livescoreMatches = [];
         vm.gridOptions = {
             onRegisterApi: function (gridApi) {
                 vm.gridApi = gridApi;
+                var browserHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 200;
+                angular.element(document.getElementsByClassName('grid')[0]).css('height', browserHeight + 'px');
             },
             //showGridFooter: true,
             enableColumnMenus: false,
@@ -38,7 +39,7 @@
                     field: 'leagueName',
                     width: 70,
                     enableFiltering: false,
-                    cellTemplate: '<div class="ui-grid-cell-contents"><img class="flag-image" ng-src="{{row.entity.flag}}" alt="Country flag image">{{COL_FIELD}}</div>',
+                    cellTemplate: '<div class="ui-grid-cell-contents" ng-mouseover="grid.appScope.parseTooltip(row.entity.leagueName)" uib-tooltip="{{grid.appScope.toolTip}}" tooltip-append-to-body="true" tooltip-placement="left"><img class="flag-image" ng-src="{{row.entity.flag}}" alt="Country flag image">{{COL_FIELD}}</div>'
                 },
                 {
                     name: 'State',
@@ -57,7 +58,7 @@
                     field: 'liveTime',
                     width: 30,
                     cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
-                        if (grid.getCellValue(row, col) !== '') {
+                        if (grid.getCellValue(row, col) !== '' || row.entity.matchState == 'H/T') {
                             return 'green';
                         }
                     },
@@ -90,11 +91,17 @@
             ]
         };
 
+        vm.gridOptions.appScopeProvider = vm;
+
+
         vm.toggleFiltering = function () {
             vm.gridOptions.enableFiltering = !vm.gridOptions.enableFiltering;
             vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
         };
 
+        vm.parseTooltip = function (p) {
+            vm.toolTip = p;
+        }
 
         activate();
 
