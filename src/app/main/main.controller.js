@@ -6,7 +6,8 @@
         .controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($interval, $filter, $scope, moment, footballData, uiGridConstants) {
+    function MainController($interval, $filter, moment, footballData, uiGridConstants, _) {
+        _.each([1, 2, 3], console.log);
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
         vm.fixtures = [];
