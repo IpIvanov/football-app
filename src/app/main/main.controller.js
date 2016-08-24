@@ -57,7 +57,7 @@
                 {
                     name: 'Time',
                     field: 'liveTime',
-                    width: 30,
+                    width: 40,
                     cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
                         if (grid.getCellValue(row, col) !== '' || row.entity.matchState == 'H/T') {
                             return 'green';
