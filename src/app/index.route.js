@@ -19,6 +19,12 @@
                 templateUrl: 'app/predictions/predictions.html',
                 controller: 'PredictionsController',
                 controllerAs: 'predictions'
+            })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'app/login/login.html',
+                controller: 'LoginController',
+                controllerAs: 'login'
             });
 
         $urlRouterProvider.otherwise('/');
