@@ -7,19 +7,19 @@
 
     /** @ngInject */
     function MainController($interval, $filter, uiGridConstants, moment, footballDataService, fixturesService, _) {
-        _.each([1, 2, 3], console.log);
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
         vm.fixtures = [];
         vm.competitions = [];
         vm.livescoreMatches = [];
+        vm.showWatermark = false;
         vm.gridOptions = {
             onRegisterApi: function (gridApi) {
                 vm.gridApi = gridApi;
+                vm.gridApi.grid.registerRowsProcessor(vm.singleFilter, 200);
                 var browserHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 200;
                 angular.element(document.getElementsByClassName('grid')[0]).css('height', browserHeight + 'px');
             },
-            //showGridFooter: true,
             enableColumnMenus: false,
             minRowsToShow: 25,
             enableGridMenu: true,
@@ -32,14 +32,12 @@
                     field: 'startTime',
                     width: 50,
                     enableCellEdit: true,
-                    type: 'date',
-                    enableFiltering: false
+                    type: 'date'
                 },
                 {
                     name: 'League',
                     field: 'leagueName',
                     width: 70,
-                    enableFiltering: false,
                     cellTemplate: '<div class="ui-grid-cell-contents" ng-init="grid.appScope.parseTooltip(row.entity.flag)" ng-mouseenter="grid.appScope.parseTooltip(row.entity.flag)" uib-tooltip="{{grid.appScope.toolTip}}" tooltip-append-to-body="true" tooltip-placement="left" tooltip-animation="false"><img class="flag-image" ng-src="{{row.entity.flag}}" alt="Country flag image">{{COL_FIELD}}</div>'
                 },
                 {
@@ -51,19 +49,17 @@
                             return 'green';
                         }
                     },
-                    cellTemplate: '<div class="ui-grid-cell-contents" ng-if="row.entity.matchState !== \'Sched\'">{{COL_FIELD}}</div>',
-                    enableFiltering: false
+                    cellTemplate: '<div class="ui-grid-cell-contents" ng-if="row.entity.matchState !== \'Sched\'">{{COL_FIELD}}</div>'
                 },
                 {
-                    name: 'Time',
+                    name: '',
                     field: 'liveTime',
                     width: 40,
                     cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
                         if (grid.getCellValue(row, col) !== '' || row.entity.matchState == 'H/T') {
                             return 'green';
                         }
-                    },
-                    enableFiltering: false
+                    }
                 },
                 {
                     name: 'Home Team',
@@ -84,8 +80,7 @@
                         if (grid.getCellValue(row, col) !== '-') {
                             return 'bold-text';
                         }
-                    },
-                    enableFiltering: false
+                    }
                 },
                 {name: 'E/T', field: 'extraTimeResult', width: 50, visible: false},
                 {name: 'P/R', field: 'penaltiesResult', width: 50, visible: false}
@@ -101,8 +96,32 @@
         };
 
         vm.parseTooltip = function (p) {
-            vm.toolTip = p.split( "/" ).pop().split(".")[0].toUpperCase();
-        }
+            vm.toolTip = p.split("/").pop().split(".")[0].toUpperCase();
+        };
+
+        vm.filter = function () {
+            vm.gridApi.grid.refresh();
+        };
+
+        vm.singleFilter = function (renderableRows) {
+            if (angular.isDefined(vm.filterValue)) {
+                var matcher = new RegExp(vm.filterValue.toUpperCase());
+            }
+            renderableRows.forEach(function (row) {
+                var match = false;
+                vm.countResults = 0;
+                [row.entity.homeTeam.name, row.entity.awayTeam.name, row.entity.flag.split("/").pop().split(".")[0].toUpperCase()].forEach(function (field) {
+                    if (field.match(matcher)) {
+                        match = true;
+                    }
+                });
+                if (!match) {
+                    row.visible = false;
+                }
+            });
+
+            return renderableRows;
+        };
 
         activate();
 

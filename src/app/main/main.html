@@ -1,16 +1,27 @@
 <acme-navbar></acme-navbar>
 <div class="container">
     <div class="row toggle">
-        <div class="col-xs-12">
-            <button id="toggleFiltering" class="btn btn-default btn-toggle pull-right" ng-click="main.toggleFiltering()">Toggle
-                Filtering
-            </button>
+        <div class="col-xs-6">
+            <div class="form-group" ng-init="main.filterValue = ''">
+                <input type="text" class="form-control" id="search" placeholder="Team or country for today matches"
+                       ng-model='main.filterValue' ng-change='main.filter()'>
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="main.filterValue !== ''" ng-click="main.filterValue = ''"></span>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <!--<button id="toggleFiltering" class="btn btn-default btn-toggle pull-right"-->
+                    <!--ng-click="main.toggleFiltering()">Toggle-->
+                <!--Filtering-->
+            <!--</button>-->
             <span class="time-zone pull-right">{{main.localTime}} {{main.timeZone}} {{ main.today }}</span>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div id="grid1" ui-grid="main.gridOptions" class="grid"></div>
+            <div id="grid1" ui-grid="main.gridOptions" class="grid" ui-grid-selection ui-grid-exporter>
+                <div class="watermark" ng-if="main.gridApi.core.getVisibleRows().length === 0">No Results</div>
+            </div>
         </div>
     </div>
 </div>

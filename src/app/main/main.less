@@ -24,6 +24,9 @@
 
 .toggle {
   margin-bottom: 20px;
+  .form-group {
+    margin-top: 15px;
+  }
 }
 
 .bold-text {
@@ -102,4 +105,33 @@
 
 .tooltip.left .tooltip-arrow {
   border-left: 5px solid @mainBackgroundColor;
+}
+
+.form-control-feedback.glyphicon-search {
+  top: 15px;
+  left: 15px;
+  color: @mainBackgroundColor;
+}
+
+.form-control-feedback.glyphicon-remove {
+  top: 15px;
+  right: 15px;
+  color: @mainBackgroundColor;
+  cursor: pointer;
+}
+
+.form-control {
+  padding-left: 30px;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3em;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+  color: @orange;
+  font-style: italic;
 }
