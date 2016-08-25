@@ -13,6 +13,7 @@
         vm.competitions = [];
         vm.livescoreMatches = [];
         vm.showWatermark = false;
+        vm.emptyTableMessage = "Loading Data...";
         vm.gridOptions = {
             onRegisterApi: function (gridApi) {
                 vm.gridApi = gridApi;
@@ -123,6 +124,14 @@
             return renderableRows;
         };
 
+        vm.clearInput = function () {
+            if (event.which === 27) { //esc key
+                vm.filterValue = '';
+                vm.gridApi.grid.refresh();
+                event.preventDefault();
+            }
+        };
+
         activate();
 
         function activate() {
@@ -143,6 +152,8 @@
                     angular.forEach(vm.gridOptions.data, function (value, index) {
                         vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
                     });
+                }).finally(function(){
+                    vm.emptyTableMessage = "No Results";
                 });
             });
         }
