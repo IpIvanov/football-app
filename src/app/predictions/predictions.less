@@ -1,6 +1,69 @@
-.card{
-  background-color: @mainBackgroundColor;
-  color: #fff;
-  margin-bottom: 20px;
-  padding: 10px;
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
+
+.item {
+}
+
+.wrapper {
+  color: #030303;
+  margin: 10px 5px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+}
+
+.card {
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  color: #685C79;
+  float: left;
+  flex-grow: 1;
+  flex-basis: 30%;
+  background: white;
+  margin: 10px;
+  height: auto;
+  box-shadow: 0 0 20px #555;
+}
+
+.card:hover {
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+  transform: scale(1.02);
+  box-shadow: 0 0 40px #555;
+}
+
+.card header, .card main, .card footer {
+  padding: 20px;
+}
+
+.card header {
+  background: @orange;
+  color: white;
+  font-family: Lato-Black, Arial, sans-serif;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+.card footer {
+  background: @mainBackgroundColor;
+  a {
+    color: white;
+  }
+}
+
+

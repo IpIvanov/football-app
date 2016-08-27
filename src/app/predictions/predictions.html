@@ -1,15 +1,23 @@
 <acme-navbar></acme-navbar>
 <div class="container">
-    <div class="row">
-        <div masonry  >
-            <div masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
-                <!-- items -->
-                <div masonry-tile class="col-md-4" ng-repeat="prediction in predictions.predictions">
-                    <h1>{{prediction.homeTeam}} vs {{prediction.awayTeam}}</h1>
-                    <h1>{{prediction.startTime}}</h1>
-                </div>
+    <div class="row flex">
+        <!-- items -->
+        <div class="col-md-3" ng-repeat="prediction in predictions.predictions">
+            <div class="card">
+                <header>
+                    <h5>{{prediction.homeTeam}} vs {{prediction.awayTeam}}</h5>
+                </header>
+                <main>
+                    <p class="card-subtitle text-muted">Start time: {{prediction.startTime}}</p>
+                    <p class="card-text"><span>{{prediction.prediction}}</span> <span>{{predicition.exactResult}}</span>
+                </main>
+                <footer>
+                    <a href="#" class="card-link">Facebook</a>
+                    <a href="#" class="card-link">Twitter</a>
+                </footer>
             </div>
         </div>
+
     </div>
 </div>
 

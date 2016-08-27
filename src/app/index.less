@@ -14,6 +14,28 @@
 @orange: #FF695E;
 @mainBackgroundColor: #31455C;
 
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('../assets/fonts/lato/Lato-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Lato-Black';
+  src: url('../assets/fonts/lato/Lato-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Lato-Regular, Arial, sans-serif;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -55,7 +77,7 @@ input[type="color"]:focus,
 }
 
 .form-group .form-control-feedback {
-  pointer-events: initial  /* or - auto // or -  unset  */
+  pointer-events: initial /* or - auto // or -  unset  */
 }
 
 /**
