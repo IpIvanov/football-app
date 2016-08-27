@@ -29,12 +29,12 @@
     </div>
     <div id="sub-navbar" class="navbar-collapse collapse" ng-cloak>
       <ul class="nav navbar-nav navbar-left" ng-if="vm.username === ''">
-        <li ng-click="vm.register()" ng-if="vm.username === ''"><a>Register</a></li>
-        <li ng-click="vm.login()" ng-if="vm.username === ''"><a>Login</a></li>
+        <li ng-click="vm.register()"><a>Register</a></li>
+        <li ng-click="vm.login()"><a>Login</a></li>
       </ul>
       <p class="navbar-text username" ng-if="vm.username !== ''"><span class="glyphicon glyphicon-user"></span> {{vm.username}}</p>
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-click="vm.logout()" ng-if="vm.username !== ''"><a>Logout</a></li>
+      <ul class="nav navbar-nav navbar-right" ng-if="vm.username !== ''">
+        <li ng-click="vm.logout()"><a>Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->
