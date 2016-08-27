@@ -13,7 +13,28 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-class="{ active: vm.isActive('/')}"><a ui-sref="home">LiveScore</a></li>
         <li ng-class="{ active: vm.isActive('/predictions')}"><a ui-sref="predictions">Predictions</a></li>
-        <li ng-class="{ active: vm.isActive('/login')}"><a ui-sref="login">Login</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>
+<nav class="sub-navbar navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="sub-navbar" class="navbar-collapse collapse" ng-cloak>
+      <ul class="nav navbar-nav navbar-left" ng-if="vm.username === ''">
+        <li ng-click="vm.register()" ng-if="vm.username === ''"><a>Register</a></li>
+        <li ng-click="vm.login()" ng-if="vm.username === ''"><a>Login</a></li>
+      </ul>
+      <p class="navbar-text username" ng-if="vm.username !== ''"><span class="glyphicon glyphicon-user"></span> {{vm.username}}</p>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-click="vm.logout()" ng-if="vm.username !== ''"><a>Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->

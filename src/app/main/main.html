@@ -4,7 +4,7 @@
         <div class="col-xs-6">
             <div class="form-group" ng-init="main.filterValue = ''">
                 <input type="text" class="form-control" id="search" placeholder="Team or country for today matches"
-                       ng-model='main.filterValue' ng-change='main.filter()' ng-keydown="main.clearInput()">
+                       ng-model='main.filterValue' ng-change='main.filter()' ng-keydown="main.clearInput($event)">
                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="main.filterValue !== ''"
                       ng-click="main.filterValue = ''; main.filter()"></span>

@@ -6,7 +6,7 @@
         .controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($interval, $filter, uiGridConstants, moment, footballDataService, fixturesService, _) {
+    function MainController($interval, $filter, uiGridConstants, moment, footballDataService, fixturesService) {
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
         vm.fixtures = [];
@@ -18,7 +18,7 @@
             onRegisterApi: function (gridApi) {
                 vm.gridApi = gridApi;
                 vm.gridApi.grid.registerRowsProcessor(vm.singleFilter, 200);
-                var browserHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 200;
+                var browserHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 230;
                 angular.element(document.getElementsByClassName('grid')[0]).css('height', browserHeight + 'px');
             },
             enableColumnMenus: false,
@@ -124,7 +124,7 @@
             return renderableRows;
         };
 
-        vm.clearInput = function () {
+        vm.clearInput = function (event) {
             if (event.which === 27) { //esc key
                 vm.filterValue = '';
                 vm.gridApi.grid.refresh();
@@ -138,7 +138,7 @@
             getLiveMatches();
             $interval(function () {
                 getLiveMatches();
-            }, 30000);
+            }, 60000);
         }
 
         function getLiveMatches() {

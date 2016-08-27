@@ -1,6 +1,7 @@
 .navbar {
   background: @mainBackgroundColor;
   border: 0;
+  margin-bottom: 0;
   ul {
     li {
       height: 80px;
@@ -27,5 +28,41 @@
   }
   .navbar-brand{
     height: 100%;
+  }
+}
+
+.sub-navbar{
+  background-color: @orange;
+  margin-bottom: 20px;
+  ul {
+    li {
+      height: 30px;
+      a {
+        color: white;
+        line-height: 0;
+        font-weight: 600;
+      }
+      a:hover, a:active, a:visited{
+        background-color: @orange;
+        text-decoration: underline;
+      }
+    }
+    li:focus{
+      outline: none !important;
+    }
+  }
+}
+
+.navbar-text.username{
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-weight: 600;
+  line-height: 30px;
+  font-size: 16px;
+  font-style: italic;
+  .glyphicon-user{
+    font-size: 18px;
+    margin-right: 5px;
   }
 }

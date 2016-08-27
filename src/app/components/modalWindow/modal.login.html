@@ -1,0 +1,44 @@
+<div id="register">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Login</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form name="loginForm" novalidate class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control col-xs-10" name="name" ng-model="modalLogin.name" required
+                           placeholder="Name"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Password</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="password" ng-model="modalLogin.password"
+                           required placeholder="Password"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="sk-circle" ng-if="modalLogin.showLoadingBar">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+        </div>
+        <button class="btn btn-primary ok-btn" type="button" ng-click="modalLogin.ok(loginForm, loginForm.$error.required)">OK</button>
+        <button class="btn btn-link cancel-button" type="button" ng-click="modalLogin.cancel()">Cancel</button>
+    </div>
+</div>
+
+
+
