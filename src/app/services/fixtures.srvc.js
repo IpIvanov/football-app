@@ -23,7 +23,7 @@
                 vm.fixtures = fixtures;
             }
             else{
-                console.log('fixtures are the same')
+                //console.log('fixtures are the same')
             }
         }
 

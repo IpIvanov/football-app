@@ -45,7 +45,7 @@
                     name: 'State',
                     field: 'matchState',
                     width: 55,
-                    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                    cellClass: function (grid, row, col) {
                         if (grid.getCellValue(row, col) === '1 HF' || grid.getCellValue(row, col) === '2 HF' || grid.getCellValue(row, col) === 'H/T') {
                             return 'green';
                         }
@@ -56,7 +56,7 @@
                     name: '',
                     field: 'liveTime',
                     width: 40,
-                    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                    cellClass: function (grid, row, col) {
                         if (grid.getCellValue(row, col) !== '' || row.entity.matchState == 'H/T') {
                             return 'green';
                         }
@@ -65,19 +65,19 @@
                 {
                     name: 'Home Team',
                     field: 'homeTeam.name',
-                    cellTemplate: '<div class="ui-grid-cell-contents"><b>{{COL_FIELD}}</b> <span class="team-rank">{{row.entity.homeTeam.leagueRank}}</span><span class="yellow-cards" ng-if="row.entity.homeTeam.yellowCards !== \'0\'">{{row.entity.homeTeam.yellowCards}}</span><span class="red-cards" ng-if="row.entity.homeTeam.redCards !== \'0\'">{{row.entity.homeTeam.redCards}}</span></div>'
+                    cellTemplate: '<div class="ui-grid-cell-contents"><span class="yellow-cards" ng-if="row.entity.homeTeam.yellowCards !== \'0\'">{{row.entity.homeTeam.yellowCards}}</span><span class="red-cards" ng-if="row.entity.homeTeam.redCards !== \'0\'">{{row.entity.homeTeam.redCards}}</span><b>{{COL_FIELD}}</b> <span class="team-rank">{{row.entity.homeTeam.leagueRank}}</span></div>'
                 },
                 {
                     name: 'Away Team',
                     field: 'awayTeam.name',
-                    cellTemplate: '<div class="ui-grid-cell-contents"><b>{{COL_FIELD}}</b> <span class="team-rank">{{row.entity.awayTeam.leagueRank}}</span><span class="yellow-cards" ng-if="row.entity.awayTeam.yellowCards !== \'0\'">{{row.entity.awayTeam.yellowCards}}</span><span class="red-cards" ng-if="row.entity.awayTeam.redCards !== \'0\'">{{row.entity.awayTeam.redCards}}</span></div>'
+                    cellTemplate: '<div class="ui-grid-cell-contents"><b><span class="yellow-cards" ng-if="row.entity.awayTeam.yellowCards !== \'0\'">{{row.entity.awayTeam.yellowCards}}</span><span class="red-cards" ng-if="row.entity.awayTeam.redCards !== \'0\'">{{row.entity.awayTeam.redCards}}</span>{{COL_FIELD}}</b> <span class="team-rank">{{row.entity.awayTeam.leagueRank}}</span></div>'
                 },
                 {name: 'H/T', field: 'halfTimeResult', width: 50, enableFiltering: false},
                 {
                     name: 'F/T',
                     field: 'fullTimeResult',
                     width: 50,
-                    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                    cellClass: function (grid, row, col) {
                         if (grid.getCellValue(row, col) !== '-') {
                             return 'bold-text';
                         }

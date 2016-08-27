@@ -29,7 +29,6 @@
                 token = "NOT LOGGED IN";
             }
             registerLoginService.checkToken(token).then(function (result) {
-                console.log(result)
                 if (result.split("|")[0].trim() === "authorized") {
                     vm.username = result.split("|")[1].trim();
                 } else {
@@ -45,7 +44,7 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'app/components/modalWindow/modal.register.html',
-                    controller: 'ModalRegister',
+                    controller: 'ModalRegisterController',
                     controllerAs: 'modalRegister',
                     bindToController: true,
                     size: 'md',
@@ -65,7 +64,7 @@
             };
 
             vm.logout = function (){
-                registerLoginService.logOutUser(token).then(function (result) {
+                registerLoginService.logOutUser(token).then(function () {
                     localStorage.clear();
                     vm.username = '';
                 });
@@ -75,7 +74,7 @@
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'app/components/modalWindow/modal.login.html',
-                    controller: 'ModalLogin',
+                    controller: 'ModalLoginController',
                     controllerAs: 'modalLogin',
                     bindToController: true,
                     size: 'md',

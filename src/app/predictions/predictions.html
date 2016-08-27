@@ -1,14 +1,17 @@
 <acme-navbar></acme-navbar>
 <div class="container">
     <div class="row">
-        <div class="col-md-4" data-ng-repeat="prediction in predictions.predictions">
-            <div class="card">
-                <span>{{prediction.startTime}}</span>
-                <h4>{{prediction.homeTeam}} vs {{prediction.awayTeam}}</h4>
-                <p ng-if="prediction.prediction!==undefined">{{prediction.prediction}}</p>
-                <p ng-if="prediction.prediction.OverUnder!==undefined">{{prediction.OverUnder}}</p>
-                <p ng-if="prediction.exactResult!==undefined">{{prediction.exactResult}}</p>
+        <div masonry  >
+            <div masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
+                <!-- items -->
+                <div masonry-tile class="col-md-4" ng-repeat="prediction in predictions.predictions">
+                    <h1>{{prediction.homeTeam}} vs {{prediction.awayTeam}}</h1>
+                    <h1>{{prediction.startTime}}</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+

@@ -18,6 +18,7 @@
 
         function getPredictions() {
             footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_predictions.php').then(function (result) {
+                console.log(result.data)
                 vm.predictions = result.data;
             });
         }

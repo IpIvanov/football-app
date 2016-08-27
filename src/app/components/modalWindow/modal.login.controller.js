@@ -3,10 +3,10 @@
 
     angular
         .module('football')
-        .controller('ModalLogin', ModalLogin);
+        .controller('ModalLoginController', ModalLoginController);
 
     /** @ngInject */
-    function ModalLogin($uibModalInstance, registerLoginService, toastr, toastrConfig) {
+    function ModalLoginController($uibModalInstance, registerLoginService, toastr, toastrConfig) {
         var modalLogin = this;
 
         toastrConfig.positionClass = 'toast-top-right';
@@ -25,7 +25,6 @@
                     username: modalLogin.name,
                     password: modalLogin.password
                 }
-                console.log(modalLogin.loginInfo);
                 registerLoginService.logInUser(modalLogin.loginInfo).then(function (result) {
                     modalLogin.showLoadingBar = false;
                     if(result === 'ERROR'){

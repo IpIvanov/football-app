@@ -22,7 +22,6 @@
 
     /** @ngInject */
     function LiveFixturesController() {
-      var vm = this;
     }
   }
 

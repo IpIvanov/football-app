@@ -3,10 +3,10 @@
 
     angular
         .module('football')
-        .controller('ModalRegister', ModalRegister);
+        .controller('ModalRegisterController', ModalRegisterController);
 
     /** @ngInject */
-    function ModalRegister($uibModalInstance, toastr, toastrConfig, registerLoginService) {
+    function ModalRegisterController($uibModalInstance, toastr, toastrConfig, registerLoginService) {
         var modalRegister = this;
 
         toastrConfig.positionClass = 'toast-top-right';
@@ -27,7 +27,6 @@
                     email: modalRegister.email,
                     password: modalRegister.password
                 }
-                console.log(modalRegister.registerInfo);
                 registerLoginService.registerUser(modalRegister.registerInfo).then(function (result) {
                     modalRegister.showLoadingBar = false;
                     if(result === 'This user name already exists.'){
