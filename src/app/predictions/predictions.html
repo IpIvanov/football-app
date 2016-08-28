@@ -1,5 +1,16 @@
 <acme-navbar></acme-navbar>
 <div class="container">
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-3">
+            <button class="btn btn-primary ok-btn add-prediction btn-lg pull-right" ng-click="predictions.addPrediction()">Add Prediction</button>
+        </div>
+        <div class="col-xs-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="text-center">Daily predictions for {{predictions.today}}</h2>
+    </div>
     <div class="row flex">
         <!-- items -->
         <div class="col-md-3" ng-repeat="prediction in predictions.predictions">
@@ -8,12 +19,12 @@
                     <h5>{{prediction.homeTeam}} vs {{prediction.awayTeam}}</h5>
                 </header>
                 <main>
-                    <p class="card-subtitle text-muted">Start time: {{prediction.startTime}}</p>
-                    <p class="card-text"><span>{{prediction.prediction}}</span> <span>{{predicition.exactResult}}</span>
+                    <p class="card-text">Prediction: <b>{{prediction.prediction}}</b></p>
+                    <p class="card-text">{{prediction.OverUnder}} 2.5 goals</p>
+                    <p class="card-text">Exact result: {{prediction.exactResult}}</p>
                 </main>
                 <footer>
-                    <a href="#" class="card-link">Facebook</a>
-                    <a href="#" class="card-link">Twitter</a>
+                    <p>Start time: {{prediction.startTime}}</p>
                 </footer>
             </div>
         </div>

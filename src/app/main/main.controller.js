@@ -142,19 +142,16 @@
         }
 
         function getLiveMatches() {
-            footballDataService.getLiveScoresData('http://freegeoip.net/json/').then(function (result) {
-                vm.timeZone = result.time_zone;
-                footballDataService.setTimeZone(result.time_zone);
-                vm.localTime = moment().tz(footballDataService.getTimeZone()).format("HH:mm");
-                footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
-                    vm.gridOptions.data = result.data;
-                    fixturesService.setFixtures(result.data);
-                    angular.forEach(vm.gridOptions.data, function (value, index) {
-                        vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
-                    });
-                }).finally(function(){
-                    vm.emptyTableMessage = "No Results";
+            footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
+                vm.gridOptions.data = result.data;
+                fixturesService.setFixtures(result.data);
+                angular.forEach(vm.gridOptions.data, function (value, index) {
+                    vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
                 });
+            }).finally(function () {
+                vm.emptyTableMessage = "No Results";
+                vm.timeZone = footballDataService.getTimeZone();
+                vm.localTime = moment().tz(footballDataService.getTimeZone()).format("HH:mm");
             });
         }
     }
