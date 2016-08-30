@@ -2,8 +2,8 @@
     <div class="modal-header">
         <h3 class="modal-title" id="modal-title">Register</h3>
     </div>
-    <div class="modal-body" id="modal-body">
-        <form name="registerForm" novalidate class="form-horizontal">
+    <form name="registerForm" novalidate class="form-horizontal">
+        <div class="modal-body" id="modal-body">
             <div class="form-group">
                 <label class="control-label col-sm-4">Name</label>
                 <div class="col-sm-6">
@@ -32,26 +32,29 @@
                            ng-model="modalRegister.confirmPassword" required placeholder="Confirm password"/>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="sk-circle" ng-if="modalRegister.showLoadingBar">
-            <div class="sk-circle1 sk-child"></div>
-            <div class="sk-circle2 sk-child"></div>
-            <div class="sk-circle3 sk-child"></div>
-            <div class="sk-circle4 sk-child"></div>
-            <div class="sk-circle5 sk-child"></div>
-            <div class="sk-circle6 sk-child"></div>
-            <div class="sk-circle7 sk-child"></div>
-            <div class="sk-circle8 sk-child"></div>
-            <div class="sk-circle9 sk-child"></div>
-            <div class="sk-circle10 sk-child"></div>
-            <div class="sk-circle11 sk-child"></div>
-            <div class="sk-circle12 sk-child"></div>
         </div>
-        <button class="btn btn-primary ok-btn" type="button" ng-click="modalRegister.ok(registerForm, registerForm.$error.required, registerForm.email.$error.email)">OK</button>
-        <button class="btn btn-link cancel-button" type="button" ng-click="modalRegister.cancel()">Cancel</button>
-    </div>
+        <div class="modal-footer">
+            <div class="sk-circle" ng-if="modalRegister.showLoadingBar">
+                <div class="sk-circle1 sk-child"></div>
+                <div class="sk-circle2 sk-child"></div>
+                <div class="sk-circle3 sk-child"></div>
+                <div class="sk-circle4 sk-child"></div>
+                <div class="sk-circle5 sk-child"></div>
+                <div class="sk-circle6 sk-child"></div>
+                <div class="sk-circle7 sk-child"></div>
+                <div class="sk-circle8 sk-child"></div>
+                <div class="sk-circle9 sk-child"></div>
+                <div class="sk-circle10 sk-child"></div>
+                <div class="sk-circle11 sk-child"></div>
+                <div class="sk-circle12 sk-child"></div>
+            </div>
+            <button class="btn btn-primary ok-btn" type="submit"
+                    ng-click="modalRegister.ok(registerForm, registerForm.$error.required, registerForm.email.$error.email)">
+                OK
+            </button>
+            <button class="btn btn-link cancel-button" type="button" ng-click="modalRegister.cancel()">Cancel</button>
+        </div>
+    </form>
 </div>
 
 
