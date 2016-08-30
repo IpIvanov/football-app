@@ -9,9 +9,6 @@
     function MainController($interval, $filter, uiGridConstants, moment, footballDataService, fixturesService) {
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
-        vm.fixtures = [];
-        vm.competitions = [];
-        vm.livescoreMatches = [];
         vm.showWatermark = false;
         vm.emptyTableMessage = "Loading Data...";
         vm.gridOptions = {
