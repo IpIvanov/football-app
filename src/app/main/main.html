@@ -16,9 +16,9 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-3 col-xs-offset-9">
+    <div class="col-xs-3">
       <datepicker ng-click="main.getDate()" date-set="{{main.today.toString()}}" date-day-title="selected year" date-format="dd/MM EEEE" date-min-limit="{{main.beforeSevenDays.toString()}}" date-max-limit="{{main.afterSevenDays.toString()}}" datepicker-class="tips-datepicker">
-        <input ng-model="date" type="button" class="btn btn-link ok-btn datepicker"/>
+        <input ng-model="date" type="button" class="btn btn-primary ok-btn datepicker-button"/>
       </datepicker>
     </div>
     <div class="col-xs-12">

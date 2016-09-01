@@ -145,6 +145,7 @@
             $interval(function () {
                 getLiveMatches();
             }, 60000);
+          getMatchesForTheDay();
         }
 
         function getLiveMatches() {
@@ -163,5 +164,14 @@
                 });
             });
         }
+
+      function getMatchesForTheDay(){
+          footballDataService.getLiveScoresDataByTableName('http://ipivanov.com/livescores/get_data_xscores_table.php', "XSCORES_05_09_16").then(function (result) {
+            console.log(result)
+          }).finally(function(){
+            vm.emptyTableMessage = "No Results";
+          });
+
+      }
     }
 })();
