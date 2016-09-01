@@ -1,24 +1,30 @@
 <acme-navbar></acme-navbar>
 <div class="container">
-    <div class="row toggle">
-        <div class="col-xs-6">
-            <div class="form-group" ng-init="main.filterValue = ''">
-                <input type="text" class="form-control" id="search" placeholder="Team or country for today matches"
-                       ng-model='main.filterValue' ng-change='main.filter()' ng-keydown="main.clearInput($event)">
-                <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="main.filterValue !== ''"
-                      ng-click="main.filterValue = ''; main.filter()"></span>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <span class="time-zone pull-right">{{main.localTime}} {{main.timeZone}} {{ main.today }}</span>
-        </div>
+  <div class="row toggle">
+    <div class="col-xs-6">
+      <div class="form-group" ng-init="main.filterValue = ''">
+        <input type="text" class="form-control" id="search" placeholder="Team or country for today matches"
+               ng-model='main.filterValue' ng-change='main.filter()' ng-keydown="main.clearInput($event)">
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="main.filterValue !== ''"
+              ng-click="main.filterValue = ''; main.filter()"></span>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <div id="grid1" ui-grid="main.gridOptions" class="grid" ui-grid-selection ui-grid-exporter>
-                <div class="watermark" ng-if="main.gridApi.core.getVisibleRows().length === 0">{{main.emptyTableMessage}}</div>
-            </div>
-        </div>
+    <div class="col-xs-6">
+      <span class="time-zone pull-right">{{main.localTime}} {{main.timeZone}} {{ main.today }}</span>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-3 col-xs-offset-9">
+      <datepicker ng-click="main.getDate()" date-set="{{main.today.toString()}}" date-day-title="selected year" date-format="dd/MM EEEE" date-min-limit="{{main.beforeSevenDays.toString()}}" date-max-limit="{{main.afterSevenDays.toString()}}" datepicker-class="tips-datepicker">
+        <input ng-model="date" type="button" class="btn btn-link ok-btn datepicker"/>
+      </datepicker>
+    </div>
+    <div class="col-xs-12">
+      <div id="grid1" ui-grid="main.gridOptions" class="grid" ui-grid-selection ui-grid-exporter>
+        <div class="watermark" ng-if="main.gridApi.core.getVisibleRows().length === 0">{{main.emptyTableMessage}}</div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -11,6 +11,10 @@
         vm.today = moment().format("dddd, MMMM DD, YYYY");
         vm.showWatermark = false;
         vm.emptyTableMessage = "Loading Data...";
+        vm.beforeSevenDays =  new Date();
+        vm.beforeSevenDays.setDate(vm.beforeSevenDays.getDate()-8);
+        vm.afterSevenDays = new Date();
+        vm.afterSevenDays.setDate(vm.afterSevenDays.getDate()+7);
         vm.gridOptions = {
             onRegisterApi: function (gridApi) {
                 vm.gridApi = gridApi;
@@ -128,6 +132,11 @@
                 event.preventDefault();
             }
         };
+
+        vm.getDate = function(){
+          console.log(new Date().getFullYear())
+          console.log(document.getElementsByClassName("datepicker")[0].defaultValue.split(' ')[0].split('/')[0] , document.getElementsByClassName("datepicker")[0].defaultValue.split(' ')[0].split('/')[1])
+        }
 
         activate();
 

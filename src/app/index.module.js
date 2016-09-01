@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('football', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ui.bootstrap', 'toastr', 'ui.grid', 'ngStorage', 'ui.grid.rowEdit']);
+    .module('football', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ui.bootstrap', 'toastr', 'ui.grid', 'ngStorage', 'ui.grid.rowEdit', '720kb.datepicker']);
 
 })();
