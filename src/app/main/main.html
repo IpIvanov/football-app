@@ -15,9 +15,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-3">
-      <datepicker date-set="{{main.today.toString()}}" date-format="dd/MM EEEE" date-min-limit="{{main.beforeSevenDays.toString()}}" date-max-limit="{{main.afterSevenDays.toString()}}" datepicker-class="tips-datepicker">
-        <input ng-model="main.date" type="text" class="btn btn-primary ok-btn datepicker-button" ng-change="main.getDate()" readonly/>
+    <div class="col-xs-2">
+      <datepicker date-set="{{main.today.toString()}}" date-format="dd/MM EEEE"
+                  date-min-limit="{{main.beforeSevenDays.toString()}}"
+                  date-max-limit="{{main.afterSevenDays.toString()}}" datepicker-class="tips-datepicker">
+        <input ng-model="main.date" type="text" class="btn btn-primary ok-btn datepicker-button"
+               ng-change="main.getDate()" readonly>
+        <span class="glyphicon glyphicon-menu-down"></span>
       </datepicker>
     </div>
     <div class="col-xs-12">
