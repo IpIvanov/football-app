@@ -137,11 +137,15 @@
 }
 
 .datepicker-button {
-  color: @orange;
-  font-weight: 600;
+  color: @orange !important;
+  border-color: @orange !important;
+  border-radius: 15px !important;
+  font-weight: 400;
   margin-bottom: 10px;
+  background: white !important;
   &:hover, &:focus {
     color: @orange;
+    outline: none !important;
   }
 }
 
@@ -154,4 +158,22 @@
   div {
     color: white;
   }
+}
+
+._720kb-datepicker-calendar-day._720kb-datepicker-active{
+  background-color: @orange !important;
+  color: white;
+  &:hover{
+    background-color: @orange !important;
+  }
+}
+
+._720kb-datepicker-calendar-day:hover{
+  background-color: @mainBackgroundColor !important;
+  color: white !important;
+}
+
+._720kb-datepicker-calendar-day._720kb-datepicker-disabled:hover{
+  color: rgba(0,0,0,.2) !important;
+  background: rgba(25,2,0,.02) !important;
 }

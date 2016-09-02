@@ -6,7 +6,7 @@
         .controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($interval, $filter, uiGridConstants, moment, footballDataService, fixturesService) {
+    function MainController($interval, $filter, $scope, uiGridConstants, moment, footballDataService, fixturesService) {
         var vm = this;
         vm.today = moment().format("dddd, MMMM DD, YYYY");
         vm.showWatermark = false;
@@ -134,8 +134,9 @@
         };
 
         vm.getDate = function(){
-          console.log(new Date().getFullYear())
-          console.log(document.getElementsByClassName("datepicker")[0].defaultValue.split(' ')[0].split('/')[0] , document.getElementsByClassName("datepicker")[0].defaultValue.split(' ')[0].split('/')[1])
+          var selectedDate = "XSCORES_" + vm.date.split(' ')[0].split('/')[0] + "_" + vm.date.split(' ')[0].split('/')[1] + "_" + (new Date().getFullYear() - 2000).toString();
+          console.log("XSCORES_" + vm.date.split(' ')[0].split('/')[0] + "_" + vm.date.split(' ')[0].split('/')[1] + "_" + (new Date().getFullYear() - 2000).toString())
+          getMatchesForTheDay(selectedDate);
         }
 
         activate();
@@ -145,7 +146,6 @@
             $interval(function () {
                 getLiveMatches();
             }, 60000);
-          getMatchesForTheDay();
         }
 
         function getLiveMatches() {
@@ -153,7 +153,8 @@
                 vm.timeZone = result.time_zone;
                 footballDataService.setTimeZone(result.time_zone);
                 vm.localTime = moment().tz(footballDataService.getTimeZone()).format("HH:mm");
-                footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
+                var tableName = "XSCORES_" + vm.date.split(' ')[0].split('/')[0] + "_" + vm.date.split(' ')[0].split('/')[1] + "_" + (new Date().getFullYear() - 2000).toString();
+                footballDataService.getLiveScoresDataByTableName('http://ipivanov.com/livescores/get_data_xscores_table.php', tableName).then(function (result) {
                     vm.gridOptions.data = result.data;
                     fixturesService.setFixtures(result.data);
                     angular.forEach(vm.gridOptions.data, function (value, index) {
@@ -165,11 +166,12 @@
             });
         }
 
-      function getMatchesForTheDay(){
-          footballDataService.getLiveScoresDataByTableName('http://ipivanov.com/livescores/get_data_xscores_table.php', "XSCORES_05_09_16").then(function (result) {
-            console.log(result)
-          }).finally(function(){
-            vm.emptyTableMessage = "No Results";
+      function getMatchesForTheDay(tableName){
+          footballDataService.getLiveScoresDataByTableName('http://ipivanov.com/livescores/get_data_xscores_table.php', tableName).then(function (result) {
+            vm.gridOptions.data = result.data;
+            angular.forEach(vm.gridOptions.data, function (value, index) {
+              vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
+            });
           });
 
       }
