@@ -3,6 +3,17 @@
         <h3 class="modal-title" id="modal-title">Make your predictions for today!</h3>
     </div>
     <div class="modal-body" id="modal-body">
+      <div class="row">
+        <div class="col-xs-4">
+          <datepicker date-set="{{modalPrediction.today.toString()}}" date-format="dd/MM EEEE"
+                      date-min-limit="{{modalPrediction.today.toString()}}"
+                      date-max-limit="{{modalPrediction.afterSevenDays.toString()}}" datepicker-class="tips-datepicker">
+            <input ng-model="modalPrediction.date" type="text" class="btn btn-primary ok-btn datepicker-button"
+                   ng-change="modalPrediction.getDate()" readonly>
+            <span class="glyphicon glyphicon-menu-down show-days"></span>
+          </datepicker>
+        </div>
+      </div>
       <div id="grid1" ui-grid="modalPrediction.gridOptions" class="grid" ui-grid-selection ui-grid-exporter></div>
     </div>
 </div>

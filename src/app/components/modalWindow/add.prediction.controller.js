@@ -9,7 +9,11 @@
   function AddPredictionController($uibModalInstance, $filter, $log, uiGridConstants, fixturesService, footballDataService) {
     var vm = this;
 
-
+    vm.today = moment().format("dddd, MMMM DD, YYYY");
+    vm.showWatermark = false;
+    vm.emptyTableMessage = "Loading Data...";
+    vm.afterSevenDays = new Date();
+    vm.afterSevenDays.setDate(vm.afterSevenDays.getDate() + 7);
     vm.gridOptions = {
       onRegisterApi: function (gridApi) {
         vm.gridApi = gridApi;
@@ -51,15 +55,28 @@
           name: 'Prediction',
           field: 'prediction',
           width: 150,
-          cellTemplate: '<div class="ui-grid-cell-contents"><select class="form-control" style="height: 24px;padding: 2px"><option selected="selected"></option><option value="home-win">Home Win</option><option value="away-win">Away Win</option><option value="over">Over 2.5goals</option><option value="under">Under 2.5goals</option><option value="gg">g / g</option><option value="gng">g / no goal</option></select></div>'
+          cellTemplate: '<div class="ui-grid-cell-contents"><select class="form-control" style="height: 24px;padding: 2px" ng-model="grid.appScope.predictions.model" ng-change="grid.appScope.setPrediction(grid.appScope.predictions.model)"><option ng-repeat="prediction in grid.appScope.predictions.availableOptions" value="{{prediction.id}} / {{row.entity.id}}">{{prediction.name}}</option><option selected="selected"></option><option value="home-win">Home Win</option><option value="away-win">Away Win</option><option value="over">Over 2.5goals</option><option value="under">Under 2.5goals</option><option value="gg">G/G</option><option value="gng">G/No goal</option></select></div>'
         }
       ]
     };
+
     vm.gridOptions.appScopeProvider = vm;
 
+    vm.setPrediction = function(prediction){
+      console.log(prediction)
+    };
+
+    vm.predictions = {
+      model: null,
+      availableOptions: [
+        {id: '1', name: 'Option A'},
+        {id: '2', name: 'Option B'},
+        {id: '3', name: 'Option C'}
+      ]
+    };
 
     vm.toggleFiltering = function () {
-      vm.gridOptions.enableFiltering =  !vm.gridOptions.enableFiltering;
+      vm.gridOptions.enableFiltering = !vm.gridOptions.enableFiltering;
       vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
     };
 
@@ -99,21 +116,40 @@
       }
     };
 
-    footballDataService.getLiveScoresData('http://ipivanov.com/bettingapp/get_data.php').then(function (result) {
-      console.log(result.data)
-      var filteredMatches = [];
-      angular.forEach(result.data, function (value, index) {
-        if (value.matchState === 'Sched') {
-          filteredMatches.push(value);
-        }
+    vm.getDate = function () {
+      var selectedDate = "XSCORES_" + vm.date.split(' ')[0].split('/')[0] + "_" + vm.date.split(' ')[0].split('/')[1] + "_" + (new Date().getFullYear() - 2000).toString();
+      console.log("XSCORES_" + vm.date.split(' ')[0].split('/')[0] + "_" + vm.date.split(' ')[0].split('/')[1] + "_" + (new Date().getFullYear() - 2000).toString())
+      getMatchesForTheDay(selectedDate);
+    }
+
+    footballDataService.getLiveScoresData('http://freegeoip.net/json/').then(function (result) {
+      vm.timeZone = result.time_zone;
+      footballDataService.setTimeZone(result.time_zone);
+      vm.localTime = moment().tz(footballDataService.getTimeZone()).format("HH:mm");
+      var tableName = "XSCORES_" + vm.date.split(' ')[0].split('/')[0] + "_" + vm.date.split(' ')[0].split('/')[1] + "_" + (new Date().getFullYear() - 2000).toString();
+      footballDataService.getLiveScoresDataByTableName('http://ipivanov.com/livescores/get_data_xscores_table.php', tableName).then(function (result) {
+        vm.gridOptions.data = [];
+        angular.forEach(result.data, function (item) {
+          if (item.matchState === "Sched") {
+            vm.gridOptions.data.push(item);
+          }
+        });
+        angular.forEach(vm.gridOptions.data, function (value, index) {
+          vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
+        });
+      }).finally(function () {
+        vm.emptyTableMessage = "No Results";
       });
-      vm.gridOptions.data = filteredMatches;
-      angular.forEach(vm.gridOptions.data, function (value, index) {
-        vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime);
-      });
-    }).finally(function () {
-      vm.emptyTableMessage = "No Results";
     });
+
+    function getMatchesForTheDay(tableName) {
+      footballDataService.getLiveScoresDataByTableName('http://ipivanov.com/livescores/get_data_xscores_table.php', tableName).then(function (result) {
+        vm.gridOptions.data = result.data;
+        angular.forEach(vm.gridOptions.data, function (value, index) {
+          vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
+        });
+      });
+    }
 
 
   }

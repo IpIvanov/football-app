@@ -173,7 +173,6 @@
               vm.gridOptions.data[index].startTime = $filter('convertDateFilter')(value.startTime)
             });
           });
-
       }
     }
 })();
